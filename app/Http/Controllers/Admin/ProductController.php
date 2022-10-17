@@ -66,7 +66,7 @@ class ProductController extends Controller
            }
         }
 
-        if(count($request->colors)>0){
+        if(isset($request->colors) && count($request->colors)>0){
            foreach ($request->colors as $key => $value) {
               $color = new ProductColor;
               $color->product_id = $res->id;
@@ -139,7 +139,7 @@ class ProductController extends Controller
            }
         }
 
-        if(count($request->colors)>0){
+        if(isset($request->colors) && count($request->colors)>0){
            ProductColor::where('product_id',$id)->delete();
            foreach ($request->colors as $key => $value) {
               $color = new ProductColor;

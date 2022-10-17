@@ -33,7 +33,7 @@
             <tr>
               <td>#{{$key+1}}</td>
               <td>{{$value->name}}</td>
-              <td><a href="{{url('category')}}/{{$value->image}}" target="_blank"><img src="{{url('category')}}/{{$value->image}}" width="20%" alt="Image"></a></td>
+              <td><a href="{{url($value->image)}}" target="_blank"><img src="{{url($value->image)}}" width="20%" alt="Image"></a></td>
               <td>{{$value->description}}</td>
               <td>{{$value->status == '1' ? 'Hidden' : 'Visible'}}</td>
               <td>

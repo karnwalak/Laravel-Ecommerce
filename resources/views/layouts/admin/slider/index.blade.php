@@ -37,13 +37,17 @@
             <tr>
               <td>#{{$key+1}}</td>
               <td>{{ucwords($value->title)}}</td>
-              <td>{{ucwords($value->description)}}</td>
-              <td>{{ucwords($value->image)}}</td>
+              <td>{{$value->description}}</td>
+              <td><a href="{{url($value->image)}}" target="_blank"><img src="{{url($value->image)}}" width="100%"></a></td>
               <td>{{$value->status == '1' ? 'Hidden' : 'Visible'}}</td>
-              <td>
+              <td class="d-flex">
                 <a href="{{route('sliders.edit',$value->id)}}" class="btn btn-success p-2"><i
                     class="mdi mdi-grease-pencil"></i></a>
-                <a href="{{route('sliders.destroy')}}" class="btn btn-danger p-2 mx-3"><i class="mdi mdi-delete"></i></a>
+                <form action="{{route('sliders.destroy',$value->id)}}" method="post">
+                  @csrf
+                  @method('DELETE')
+                  <button type="submit" class="btn btn-danger p-2 mx-3"><i class="mdi mdi-delete"></i></button>
+                </form>
               </td>
             </tr>
             @endforeach

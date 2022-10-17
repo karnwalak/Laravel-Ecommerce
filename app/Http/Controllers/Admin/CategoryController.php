@@ -40,7 +40,9 @@ class CategoryController extends Controller
             $file_name = time().'.'.$file->getClientOriginalExtension();
             $request['image']=$file_name;
             $res->image = $file_name;
-            $file->move('category', $file_name);
+            $path = 'category';
+            $res->image = $path.'/'.$file_name;
+            $file->move($path, $file_name);
         }
         if($res->save()){
             return redirect()->route('categories.index')->with('message','Category Created Successfully!');
@@ -78,8 +80,9 @@ class CategoryController extends Controller
             $file = $request->file('file');
             $file_name = time().'.'.$file->getClientOriginalExtension();
             $request['image']=$file_name;
-            $res->image = $file_name;
-            $file->move('category', $file_name);
+            $path = 'category';
+            $res->image = $path.'/'.$file_name;
+            $file->move($path, $file_name);
         }
         if($res->save()){
             return redirect()->route('categories.index')->with('message','Category Updated Successfully!');
@@ -92,7 +95,7 @@ class CategoryController extends Controller
     public function destroy(Request $request)
     {
         $file = Category::find($request->pid);
-        $path = 'category/'.$file->image;
+        $path = $file->image;
         if(File::exists($path)){
             File::delete($path);
         }

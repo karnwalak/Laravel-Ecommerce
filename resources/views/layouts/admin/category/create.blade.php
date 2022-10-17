@@ -16,7 +16,7 @@
           <div class="row">
             <div class="col-md-6 mb-3">
               <label>Name</label>
-              <input type="text" class="form-control" placeholder="Name" name="name">
+              <input type="text" class="form-control" value="{{old('name')}}" placeholder="Name" name="name">
               <span class="text-danger">
                 @error('name')
                   {{$message}}
@@ -25,7 +25,7 @@
             </div>
             <div class="col-md-6 mb-3">
               <label>Slug</label>
-              <input type="text" class="form-control" placeholder="Slug" name="slug">
+              <input type="text" class="form-control" value="{{old('slug')}}" placeholder="Slug" name="slug">
               <span class="text-danger">
                 @error('slug')
                   {{$message}}
@@ -34,7 +34,7 @@
             </div>
             <div class="col-md-12 mb-3">
               <label>Description</label>
-              <textarea class="form-control" rows="3" placeholder="Description" name="description"></textarea>
+              <textarea class="form-control" rows="3" placeholder="Description" name="description">{{old('description')}}</textarea>
               <span class="text-danger">
                 @error('description')
                   {{$message}}
@@ -62,7 +62,7 @@
             <div class="col-md-12 mb-3"><h3>SEO Tags</h3></div>
             <div class="col-md-12 mb-3">
               <label>Meta Title</label>
-              <input type="text" class="form-control" placeholder="Meta Title" name="meta_title">
+              <input type="text" class="form-control" value="{{old('meta_title')}}" placeholder="Meta Title" name="meta_title">
               <span class="text-danger">
                 @error('meta_title')
                   {{$message}}
@@ -71,7 +71,7 @@
             </div>
             <div class="col-md-12 mb-3">
               <label>Meta Keyword</label>
-              <textarea class="form-control" placeholder="Meta Keyword" name="meta_keyword"></textarea>
+              <textarea class="form-control" placeholder="Meta Keyword" value="{{old('meta_keyword')}}" name="meta_keyword"></textarea>
               <span class="text-danger">
                 @error('meta_keyword')
                   {{$message}}
@@ -80,7 +80,7 @@
             </div>
             <div class="col-md-12 mb-3">
               <label>Meta Description</label>
-              <textarea class="form-control" placeholder="Meta Description" name="meta_description"></textarea>
+              <textarea class="form-control" placeholder="Meta Description" value="{{old('meta_description')}}" name="meta_description"></textarea>
               <span class="text-danger">
                 @error('meta_description')
                   {{$message}}

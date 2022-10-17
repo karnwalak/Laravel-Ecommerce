@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Frontend\FrontendController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,9 +22,10 @@ use App\Http\Controllers\Admin\CategoryController;
 |
 */
 
-Route::get('/', function () {
-    return redirect()->route('login');
-});
+Route::get('/', [FrontendController::class,'index']);
+Route::get('/collections/get-category', [FrontendController::class,'get_category']);
+Route::get('/collections/{slug}', [FrontendController::class,'get_category_product']);
+Route::get('/product-view/{id}', [FrontendController::class,'product_view']);
 
 Auth::routes();
 
