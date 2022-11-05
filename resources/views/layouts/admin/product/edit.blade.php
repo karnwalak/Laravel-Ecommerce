@@ -77,7 +77,7 @@
                       <select name="brand" class="form-control">
                         <option value="">Select Brand</option>
                         @foreach($brand as $br)
-                        <option value="{{$br->name}}" {{$product->brand == $br->name ? 'selected' : ''}}>{{$br->name}}</option>
+                        <option value="{{$br->id}}" {{$product->brand == $br->id ? 'selected' : ''}}>{{$br->name}}</option>
                         @endforeach
                       </select>
                       <span class="text-danger">

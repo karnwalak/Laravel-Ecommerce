@@ -27,6 +27,7 @@
               <th>#ID</th>
               <th>Name</th>
               <th>Slug</th>
+              <th>Category</th>
               <th>Status</th>
               <th>Action</th>
             </tr>
@@ -37,6 +38,7 @@
               <td>#{{$key+1}}</td>
               <td>{{$value->name}}</td>
               <td>{{$value->slug}}</td>
+              <td>{{$value->category->name}}</td>
               <td>{{$value->status == '1' ? 'Hidden' : 'Visible'}}</td>
               <td>
                 <a href="{{route('brands.edit',$value->id)}}" class="btn btn-success p-2"><i class="mdi mdi-grease-pencil"></i></a>

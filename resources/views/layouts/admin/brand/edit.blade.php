@@ -16,6 +16,20 @@
           @method('PUT')
           <div class="row justify-content-center">
             <div class="col-md-7 mb-3">
+              <label>Category</label>
+              <select name="category" class="form-control">
+                <option value="">Select</option>
+                @foreach ($category as $val)
+                <option value="{{$val->id}}" @selected($val->id == $brand->category_id)>{{$val->name}}</option>
+                @endforeach
+              </select>
+              <span class="text-danger">
+                @error('category')
+                {{$message}}
+                @enderror
+              </span>
+            </div>
+            <div class="col-md-7 mb-3">
               <label>Name</label>
               <input type="text" class="form-control" value="{{$brand->name}}" placeholder="Name" name="name">
               <span class="text-danger">

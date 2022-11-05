@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Brand;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -11,25 +12,30 @@ class BrandController extends Controller
    
     public function index()
     {
-        $brand = Brand::orderBy('id','desc')->paginate(10);
+        $brand = Brand::with('category')->orderBy('id','desc')->paginate(10);
+        // return $brand;
         return view('layouts.admin.brand.index',compact('brand'));
     }
-
-   
+    
+    
     public function create()
     {
-        return view('layouts.admin.brand.create');
+        $category = Category::get(['id','name']);
+        return view('layouts.admin.brand.create',compact('category'));
     }
 
     
     public function store(Request $request)
     {
+        // return $request;
        $valid = $request->validate([
             'name' => 'required',
-            'slug' => 'required'
+            'slug' => 'required',
+            'category' => 'required|not_in:0'
        ]);
 
        $valid['status'] = $request->status == 'on' ? '1' : '0';
+       $valid['category_id'] = $request->category;
 
        if(Brand::create($valid)){
           return redirect()->route('brands.index')->with('message','Brand Added!');
@@ -42,7 +48,8 @@ class BrandController extends Controller
     public function edit($id)
     {
         $brand = Brand::find($id);
-        return view('layouts.admin.brand.edit',compact('brand'));
+        $category = Category::get(['id','name']);
+        return view('layouts.admin.brand.edit',compact('brand','category'));
     }
 
     
@@ -50,12 +57,16 @@ class BrandController extends Controller
     {
         $valid = $request->validate([
             'name' => 'required',
-            'slug' => 'required'
+            'slug' => 'required',
+            'category' => 'required|not_in:0'
        ]);
+       $brand = Brand::find($id);
+       $brand->status = $request->status == 'on' ? '1' : '0';
+       $brand->slug= $request->slug;
+       $brand->name= $request->name;
+       $brand->category_id = $request->category;
 
-       $valid['status'] = $request->status == 'on' ? '1' : '0';
-
-       if(Brand::where('id',$id)->update($valid)){
+       if($brand->save()){
           return redirect()->route('brands.index')->with('message','Brand Updated!');
         }else{
            return redirect()->route('brands.index')->with('error','Brand Not Updated!');

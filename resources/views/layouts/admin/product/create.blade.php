@@ -72,7 +72,7 @@
                       <select name="brand" class="form-control">
                         <option value="">Select Brand</option>
                         @foreach($brand as $br)
-                        <option value="{{$br->name}}">{{$br->name}}</option>
+                        <option value="{{$br->id}}">{{$br->name}}</option>
                         @endforeach
                       </select>
                       <span class="text-danger">

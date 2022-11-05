@@ -19,12 +19,13 @@ class FrontendController extends Controller
     public function get_category()
     {
         $category = Category::all();
+        // return $category;
         return view('layouts.frontend.collections.index',compact('category'));
     }
 
     public function get_category_product($slug)
     {
-        $category = Category::where('slug',$slug)->first();
+        $category = Category::with('brand')->where('slug',$slug)->first();
         if($category){
             $product = $category->products()->get();
             // return $product;
